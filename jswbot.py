@@ -29,12 +29,12 @@ async def on_oauth_completion(data):
     print('OAuth 인증이 완료되었습니다.')
 
 def run_bot():
-    bot.run('MTE4OTc4Nzc4MTAxNTI4OTg1Ng.GnjDmC.P7yNXNX776fh-rcrkN_r7EhI9v2N5cJKMKIKwI')
+    bot.run('')
 
 if __name__ == '__main__':
     import asyncio
 
     loop = asyncio.get_event_loop()
-    loop.create_task(bot.start('MTE4OTc4Nzc4MTAxNTI4OTg1Ng.GnjDmC.P7yNXNX776fh-rcrkN_r7EhI9v2N5cJKMKIKwI'))
+    loop.create_task(bot.start(''))
     loop.create_task(app.run())
     loop.run_forever()
