@@ -1,40 +1,17 @@
-
 import discord
-from discord.ext import commands
-from flask import Flask
 
-intents = discord.Intents.default()
-intents.typing = False
-intents.presences = False
+client = discord.Client()
 
-bot = commands.Bot(command_prefix='/', intents=intents)
-app = Flask(__name__)
-
-@app.route('/')
-def hello():
-    return 'Hello, World!'
-
-@bot.event
+@client.event
 async def on_ready():
-    print(f'봇이 다음으로 로그인합니다: {bot.user.name}')
-    print(f'봇 ID: {bot.user.id}')
+    print(f"We have logged in as {client.user}")
 
-@bot.command()
-async def ㅎㅇ(ctx):
-    await ctx.send('안녕')
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
 
-@bot.event
-async def on_oauth_completion(data):
-    # 콜백 페이지로부터 인증 완료 후의 처리를 작성합니다.
-    print('OAuth 인증이 완료되었습니다.')
+    if message.content.startswith("!hello"):
+        await message.channel.send("Hello!")
 
-def run_bot():
-    bot.run('')
-
-if __name__ == '__main__':
-    import asyncio
-
-    loop = asyncio.get_event_loop()
-    loop.create_task(bot.start(''))
-    loop.create_task(app.run())
-    loop.run_forever()
+client.run("YOUR_DISCORD_TOKEN")
